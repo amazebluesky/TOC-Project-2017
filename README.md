@@ -4,58 +4,31 @@ Template Code for TOC Project 2017
 
 A telegram bot based on a finite state machine
 
-## Setup
-
-### Prerequisite
-* Python 3
-
-#### Install Dependency
-```sh
-pip install -r requirements.txt
-```
-
-* pygraphviz (For visualizing Finite State Machine)
-    * [Setup pygraphviz on Ubuntu](http://www.jianshu.com/p/a3da7ecc5303)
-
-### Secret Data
-
-`API_TOKEN` and `WEBHOOK_URL` in app.py **MUST** be set to proper values.
-Otherwise, you might not be able to run your code.
-
-### Run Locally
-You can either setup https server or using `ngrok` as a proxy.
-
-**`ngrok` would be used in the following instruction**
-
-```sh
-ngrok http 5000
-```
-
-After that, `ngrok` would generate a https URL.
-
-You should set `WEBHOOK_URL` (in app.py) to `your-https-URL/hook`.
-
-#### Run the sever
-
-```sh
-python3 app.py
-```
 
 ## Finite State Machine
 ![fsm](./img/show-fsm.png)
 
 ## Usage
-The initial state is set to `user`.
+這是一個打招呼機器人，專門撫慰邊緣人的心靈，讓他們三餐都有人可以聊天。
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
+
 
 * user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
+	* 深度1：
+		* Input: "早安"
+			* Reply: "早安"
 
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
+		* Input: "午安"
+			* Reply: "午安"
 
+		* Input: "晚安"
+			* Reply: "晚安"
+	* 深度2
+		* Input: "掰掰"
+			* Reply: "掰掰"
+		* Input: "吃飯阿"
+			* Reply: "不要"
+	* 深度3
+		* Input: "掰掰"
+			* Reply: "掰掰"
 
-## Author
-[Lee-W](https://github.com/Lee-W)

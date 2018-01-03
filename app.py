@@ -7,8 +7,8 @@ from flask import Flask, request, send_file
 from fsm import TocMachine
 
 
-API_TOKEN = 'Your Telegram API Token'
-WEBHOOK_URL = 'Your Webhook URL'
+API_TOKEN = '405268559:AAGZBebpgWxe-y9yh3la4oibrmL1qE9A3dg'
+WEBHOOK_URL = 'https://bd38b9c3.ngrok.io/hook'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
@@ -16,7 +16,10 @@ machine = TocMachine(
     states=[
         'user',
         'state1',
-        'state2'
+        'state2',
+        'state3',
+        'state4',
+        'state5'
     ],
     transitions=[
         {
@@ -32,12 +35,38 @@ machine = TocMachine(
             'conditions': 'is_going_to_state2'
         },
         {
+            'trigger': 'advance',
+            'source': 'user',
+            'dest': 'state3',
+            'conditions': 'is_going_to_state3'
+        },
+        {
+            'trigger': 'advance',
+            'source':[
+            'state1',
+            'state2',
+            'state3'
+            ],
+            'dest': 'state4',
+            'conditions': 'is_going_to_state4'
+        },
+        {
             'trigger': 'go_back',
             'source': [
-                'state1',
-                'state2'
+                'state5'
             ],
             'dest': 'user'
+        },
+        {
+            'trigger': 'advance',
+            'source':[
+            'state1',
+            'state2',
+            'state3',
+            'state4'
+            ],
+            'dest': 'state5',
+            'conditions': 'is_going_to_state5'
         }
     ],
     initial='user',
@@ -72,4 +101,4 @@ def show_fsm():
 
 if __name__ == "__main__":
     _set_webhook()
-    app.run()
+    app.run(port = 8000)
